@@ -2,9 +2,6 @@ langage: node_js
 version: 
   - "8"
 dist: trusty
-os:
-  - linux
-  - osx
 env:
   -NODE_ENV=ci
 cache:
