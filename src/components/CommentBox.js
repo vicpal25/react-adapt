@@ -2,44 +2,41 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from 'actions';
 
-
 class CommentBox extends Component {
+  state = { comment: '' };
 
-    state = { comment: 'new comment'}
+  handleChange = event => {
+    this.setState({ comment: event.target.value });
+  };
 
-    handleChange = event => {
+  handleSubmit = event => {
+    event.preventDefault();
 
-        this.setState({comment: event.target.value });
+    // Call an action creator and save comment entered by user
+    this.props.saveComment(this.state.comment);
 
-    }
+    this.setState({ comment: '' });
+  };
 
-    handleSubmit = event => {
-
-        event.preventDefault();
-
-        this.props.saveComment(this.state.comment);
-
-        this.setState({comment: '' });
-        
-    }
-
-    render() {
+  render() {
     return (
-        <div>
-        <form onSubmit={this.handleSubmit} >
-            <h4>Add a Comment</h4>
-            <textarea onChange={this.handleChange} value={this.state.comment}  />
-            <div>
-                <button>Submit Commit</button>
-            </div>
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <h4>Add a Comment</h4>
+          <textarea onChange={this.handleChange} value={this.state.comment} />
+          <div>
+            <button>Submit Comment</button>
+          </div>
         </form>
-        <button onClick={this.props.fetchComments}>Fetch Comments</button>
-        </div>
- 
-    )
+        <button className="fetch-comments" onClick={this.props.fetchComments}>
+          Fetch Comments
+        </button>
+      </div>
+    );
   }
 }
 
-// export connect(null, actions);
-
-export default connect(null, actions)(CommentBox);
+export default connect(
+  null,
+  actions
+)(CommentBox);
