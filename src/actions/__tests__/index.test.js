@@ -1,23 +1,16 @@
 import { saveComment } from 'actions';
-import {SAVE_COMMENT} from 'actions/types';
+import { SAVE_COMMENT } from 'actions/types';
 
+describe('saveComment', () => {
+  it('has the correct type', () => {
+    const action = saveComment();
 
-describe('save comment', () => {
-    
-    it('correct type ', () => {
+    expect(action.type).toEqual(SAVE_COMMENT);
+  });
 
-        const action = saveComment();
+  it('has the correct payload', () => {
+    const action = saveComment('New Comment');
 
-        expect(action.type).toEqual(SAVE_COMMENT);
-        
-    });
-
-    it('has correct payload ', () => {
-        
-        const action = saveComment('New Comment');
-
-        expect(action.payload).toEqual('New Comment');
-
-    });
-
+    expect(action.payload).toEqual('New Comment');
+  });
 });

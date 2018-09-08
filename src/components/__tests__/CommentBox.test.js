@@ -1,67 +1,42 @@
 import React from 'react';
-import ReactDom from 'react-dom';
-import {
-    shallow,
-    mount
-} from 'enzyme';
-import App from '../App';
+import { mount } from 'enzyme';
 import CommentBox from 'components/CommentBox';
-import Root from '../../root';
-import {
-    CommentList
-} from 'components/CommentList';
+import Root from 'Root';
 
-
-let component;
+let wrapped;
 
 beforeEach(() => {
-    component = mount( 
-        <Root>
-            < CommentBox / > 
-        </Root>
-    );
-})
-
-it('it has a text area and button', () => {
-    expect(component.find('textarea').length).toEqual(1);
-    expect(component.find('button').length).toEqual(1);
-
-})
-
+  wrapped = mount(
+    <Root>
+      <CommentBox />
+    </Root>
+  );
+});
 
 afterEach(() => {
-    component.unmount();
-})
+  wrapped.unmount();
+});
 
+it('has a text area and two buttons', () => {
+  expect(wrapped.find('textarea').length).toEqual(1);
+  expect(wrapped.find('button').length).toEqual(2);
+});
 
-describe('text area', () => {
-    
-    it('it has a text area users can type in', () => {
+describe('the text area', () => {
+  beforeEach(() => {
+    wrapped.find('textarea').simulate('change', {
+      target: { value: 'new comment' }
+    });
+    wrapped.update();
+  });
 
-        component.find('textarea').simulate('change', () => {
-            target : { value : 'new comment'}
-        });
+  it('has a text area that users can type in', () => {
+    expect(wrapped.find('textarea').prop('value')).toEqual('new comment');
+  });
 
-        component.update();
-
-        expect(component.find('textarea').prop('value')).toEqual('new comment');
-        component.find('form').simulate('submit');
-        component.update();
-        expect(component.find('textarea').prop('value')).toEqual('');
-
-    })
-
-    it('when form is submitted text area is cleared', () => {
-
-        component.find('textarea').simulate('change', () => {
-            target : { value : 'new comment'}
-        });
-
-        component.update();
-        component.find('form').simulate('submit');
-        component.update();
-        expect(component.find('textarea').prop('value')).toEqual('');
-
-    })
-
+  it('when form is submitted, text area gets emptied', () => {
+    wrapped.find('form').simulate('submit');
+    wrapped.update();
+    expect(wrapped.find('textarea').prop('value')).toEqual('');
+  });
 });

@@ -1,43 +1,28 @@
 import React from 'react';
-import ReactDom from 'react-dom';
-import {
-    shallow,
-    mount
-} from 'enzyme';
+import { mount } from 'enzyme';
 
-// import App from '../App';
-// import CommentBox from 'components/CommentBox';
-import Root from '../../root';
-import {
-    CommentList
-} from 'components/CommentList';
+import CommentList from 'components/CommentList';
+import Root from 'Root';
 
-
-let component;
+let wrapped;
 
 beforeEach(() => {
+  const initialState = {
+    comments: ['Comment 1', 'Comment 2']
+  };
 
-    const initialState = {
-        comments: [ 'Comment 1', 'Comment 2' ]
-    }
+  wrapped = mount(
+    <Root initialState={initialState}>
+      <CommentList />
+    </Root>
+  );
+});
 
-    component = mount( 
-        <Root initialState={initialState}>
-            <CommentList /> 
-        </Root>
-    );
-})
+it('creates one LI per comment', () => {
+  expect(wrapped.find('li').length).toEqual(2);
+});
 
-
-// it('creates one LI per comment', () => {
-
-//     expect(component.find('li').length).toEqual(2);
-    
-// });
-
-
-// afterEach(() => {
-//     component.unmount();
-// })
-
-
+it('shows the text for each comment', () => {
+  expect(wrapped.render().text()).toContain('Comment 1');
+  expect(wrapped.render().text()).toContain('Comment 2');
+});
