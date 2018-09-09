@@ -3,7 +3,9 @@ import { Route, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import CommentBox from 'components/CommentBox';
 import CommentList from 'components/CommentList';
+import BlogEntry from 'components/BlogEntry';
 import * as actions from 'actions';
+import 'components/App.css';
 
 class App extends Component {
   renderButton() {
@@ -20,15 +22,23 @@ class App extends Component {
 
   renderHeader() {
     return (
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/post">Post A Comment</Link>
-        </li>
-        <li>{this.renderButton()}</li>
-      </ul>
+
+      <div className="top-bar">
+        <div className="top-bar-left">
+        <ul className="menu">
+        <li className="menu-text"><Link to="/">uʻi</Link></li>
+        </ul>
+        </div>
+        <div className="top-bar-right">
+          <ul className="menu">
+            <li>  </li>
+            <li><Link to="/post">Post A Comment</Link></li>
+            <li><Link to="/blog">Blog</Link></li>
+            <li>{this.renderButton()}</li>
+          </ul>
+        </div>
+      </div>
+
     );
   }
 
@@ -36,8 +46,17 @@ class App extends Component {
     return (
       <div>
         {this.renderHeader()}
-        <Route path="/post" component={CommentBox} />
-        <Route path="/" exact component={CommentList} />
+        <article class="grid-container">
+          <div class="grid-x grid-margin-x" id="content">
+            <div class="medium-9 cell">
+              <Route path="/post" component={CommentBox} />
+              <Route path="/" exact component={CommentList} />
+              <Route path="/blog" component={BlogEntry} />
+            </div>
+            <CommentList/>
+            </div>
+        </article>
+
       </div>
     );
   }
