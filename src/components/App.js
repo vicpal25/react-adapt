@@ -46,9 +46,9 @@ class App extends Component {
     return (
       <div>
         {this.renderHeader()}
-        <article class="grid-container">
-          <div class="grid-x grid-margin-x" id="content">
-            <div class="medium-9 cell">
+        <article className="grid-container">
+          <div className="grid-x grid-margin-x" id="content">
+            <div className="medium-9 cell">
               <Route path="/post" component={CommentBox} />
               <Route path="/" exact component={CommentList} />
               <Route path="/blog" component={BlogEntry} />
