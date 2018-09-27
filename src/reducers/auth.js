@@ -1,9 +1,18 @@
-import { CHANGE_AUTH } from 'actions/types';
+import { CHANGE_AUTH, AUTH_USER, AUTH_ERROR } from 'actions/types';
 
-export default function(state = false, action) {
+const INITIAL_STATE ={
+  authenticated :'',
+  errorMessage : ''
+}
+
+export default function(state = INITIAL_STATE, action) {
   switch (action.type) {
     case CHANGE_AUTH:
       return action.payload;
+    case AUTH_USER:
+      return {...state, authenticated: action.payload}
+    case AUTH_ERROR:
+      return {...state, errorMessage: action.payload }
     default:
       return state;
   }

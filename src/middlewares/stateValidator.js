@@ -7,7 +7,6 @@ export default ({ dispatch, getState}) => next => action => {
 
    console.log(tv4.validate(getState(), stateSchema));
 
-   debugger;
     // tv4.validate(getState(), stateSchema);
 
 

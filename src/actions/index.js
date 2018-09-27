@@ -1,5 +1,11 @@
 import axios from 'axios';
-import { SAVE_COMMENT, FETCH_COMMENTS, CHANGE_AUTH } from 'actions/types';
+import {
+  SAVE_COMMENT,
+  FETCH_COMMENTS,
+  CHANGE_AUTH,
+  AUTH_USER,
+  AUTH_ERROR
+} from 'actions/types';
 
 export function saveComment(comment) {
   return {
@@ -22,4 +28,66 @@ export function changeAuth(isLoggedIn) {
     type: CHANGE_AUTH,
     payload: isLoggedIn
   };
+}
+
+export const signup = (formProps, callback) => async dispatch => {
+
+  try {
+
+    const response = await axios.post('http://localhost:3090/signup', formProps);
+
+    dispatch({
+      type: AUTH_USER,
+      payload: response.data.token
+    });
+
+    localStorage.setItem('token', response.data.token);
+
+    callback();
+
+  } catch (error) {
+    dispatch({
+      type: AUTH_ERROR,
+      payload: 'EMAIL_IN_USE'
+    })
+
+  }
+
+};
+
+
+export const signin = (formProps, callback) => async dispatch => {
+
+  try {
+
+    const response = await axios.post('http://localhost:3090/signin', formProps);
+
+    dispatch({
+      type: AUTH_USER,
+      payload: response.data.token
+    });
+
+    localStorage.setItem('token', response.data.token);
+
+    callback();
+
+  } catch (error) {
+    dispatch({
+      type: AUTH_ERROR,
+      payload: 'Invalid Email Creds'
+    })
+
+  }
+
+};
+
+export const signout = () => {
+
+  localStorage.removeitem('token');
+
+  return {
+    type: AUTH_USER,
+    payload: ''
+  }
+
 }

@@ -3,11 +3,16 @@ import { Route, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import CommentBox from 'components/CommentBox';
 import CommentList from 'components/CommentList';
+import SignUp from 'components/SignUp';
+import SignIn from 'components/SignIn';
+import SignOut from 'components/SignOut';
+import Login from 'components/Login';
 import BlogEntry from 'components/BlogEntry';
 import * as actions from 'actions';
 import 'components/App.css';
 
 class App extends Component {
+  
   renderButton() {
     if (this.props.auth) {
       return (
@@ -50,8 +55,12 @@ class App extends Component {
           <div className="grid-x grid-margin-x" id="content">
             <div className="medium-9 cell">
               <Route path="/post" component={CommentBox} />
-              <Route path="/" exact component={CommentList} />
+              <Route path="/" exact component={SignIn} />
               <Route path="/blog" component={BlogEntry} />
+              <Route path="/signup" component={SignUp} />
+              <Route path="/signout" component={SignOut} />
+              <Route path="/signin" component={SignIn} />
+
             </div>
             <CommentList/>
             </div>

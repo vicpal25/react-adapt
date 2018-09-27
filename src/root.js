@@ -4,12 +4,17 @@ import { createStore, applyMiddleware } from 'redux';
 import async from './middlewares/async';
 import stateValidtor from './middlewares/stateValidator';
 import reducers from 'reducers';
+import reduxThunk from 'redux-thunk';
 
 export default ({ children, initialState = {} }) => {
+
+
   const store = createStore(
-    reducers,
-    initialState,
-    applyMiddleware(async, stateValidtor)
+    reducers, 
+    {
+      auth: { authenticated : localStorage.getItem('token')  }
+    },
+    applyMiddleware(async, stateValidtor, reduxThunk)
   );
 
   return <Provider store={store}>{children}</Provider>;

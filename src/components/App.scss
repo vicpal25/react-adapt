@@ -1,6 +1,9 @@
 
 body {
 
+    background-color: #17141f !important;
+
+
     font-family: 'Titillium Web', sans-serif !important;
 
     h1, h2, h3, h4, h5, h6 { 
@@ -8,12 +11,18 @@ body {
         font-family: 'Titillium Web', sans-serif !important;
     }
 
+    color: #b8b5c0!important;
+
   }
 
+label {
+    color: #b8b5c0!important;
+}
 
 
 .top-bar , .top-bar ul {
     background-color: #3a4660 !important;
+    padding: 0 .5rem !important;
 
     .menu {
 
@@ -30,4 +39,10 @@ body {
 
     }
 
+}
+
+
+.grid-container {
+
+    padding-top: 20px;
 }

@@ -1,0 +1,21 @@
+
+            <div className="createAccount">
+                <label htmlFor="email">EMAIL</label>
+                <input type="text" name="email" /><br />
+                <label htmlFor="password">PASSWORD</label>
+
+               <ReactPasswordStrength
+                  className="passwordStrenght"
+                
+                  style={{ display: 'block' }}
+                  minLength={5}
+                  minScore={2}
+                  scoreWords={['weak', 'okay', 'good', 'strong', 'stronger']}
+                  changeCallback={this.onPasswordChange}
+                  inputProps={{ name: "password", autoComplete: "off", className: "form-control" }}
+                  /><br/>
+
+                <label htmlFor="passwordConfirm">PASSWORD Confirm</label>
+                <input type="password" name="passwordConfirm" /><br />
+                <input type="submit" />                     
+              </div>
