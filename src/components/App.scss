@@ -25,15 +25,39 @@ label {
     padding: 0 .5rem !important;
 
     .menu {
+        
+        padding-left:40px;
 
-        a {
+        .logo {
+
+            a {
+                background-image: url("./styles/images/logo.png");
+                background-repeat: no-repeat;
+                background-size: 28px;
+                background-position-y: 3px;
+            }
+        }
+
+        button {
+            margin: 11px;
+            color: #d79741;            
+        }
+
+
+        a, button {
             color:#fff;
+            font-size:12px;
+            text-transform: uppercase;
+
         }
 
         .menu-text {
 
+            padding:0;
+
             a {
                 color:#c9af98;
+
             }
         }
 

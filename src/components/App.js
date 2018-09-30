@@ -6,7 +6,7 @@ import CommentList from 'components/CommentList';
 import SignUp from 'components/SignUp';
 import SignIn from 'components/SignIn';
 import SignOut from 'components/SignOut';
-import Login from 'components/Login';
+import SideNav from 'components/SideNav';
 import BlogEntry from 'components/BlogEntry';
 import * as actions from 'actions';
 import 'components/App.css';
@@ -14,14 +14,20 @@ import 'components/App.css';
 class App extends Component {
   
   renderButton() {
-    if (this.props.auth) {
+    if (!this.props.authenticated) {
       return (
-        <button onClick={() => this.props.changeAuth(false)}>Sign Out</button>
+        <ul className="menu">
+          <li><Link to="/signin">Sign In</Link></li>
+         </ul>
       );
     } else {
       return (
-        <button onClick={() => this.props.changeAuth(true)}>Sign In</button>
-      );
+        <ul className="menu">
+          <li><Link to="/signout">Sign Out</Link></li>
+          <li><Link to="/post">Post A Comment</Link></li>
+          <li><Link to="/blog">Blog</Link></li>
+          </ul>
+        );
     }
   }
 
@@ -31,16 +37,11 @@ class App extends Component {
       <div className="top-bar">
         <div className="top-bar-left">
         <ul className="menu">
-        <li className="menu-text"><Link to="/">uʻi</Link></li>
+        <li className="menu-text logo"><Link to="/">&nbsp;</Link></li>
         </ul>
         </div>
-        <div className="top-bar-right">
-          <ul className="menu">
-            <li>  </li>
-            <li><Link to="/post">Post A Comment</Link></li>
-            <li><Link to="/blog">Blog</Link></li>
-            <li>{this.renderButton()}</li>
-          </ul>
+        <div className="top-bar-right">         
+            {this.renderButton()}
         </div>
       </div>
 
@@ -49,8 +50,9 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <span>
         {this.renderHeader()}
+
         <article className="grid-container">
           <div className="grid-x grid-margin-x" id="content">
             <div className="medium-9 cell">
@@ -60,19 +62,20 @@ class App extends Component {
               <Route path="/signup" component={SignUp} />
               <Route path="/signout" component={SignOut} />
               <Route path="/signin" component={SignIn} />
-
             </div>
             <CommentList/>
             </div>
         </article>
 
-      </div>
+      </span>
+
+      
     );
   }
 }
 
 function mapStateToProps(state) {
-  return { auth: state.auth };
+  return { authenticated: state.auth.authenticated };
 }
 
-export default connect(mapStateToProps, actions)(App);
+export default connect(mapStateToProps)(App);

@@ -61,6 +61,9 @@ signUp(evt) {
 }
 
 onSubmit = formProps => {
+
+  console.log(formProps);
+
   this.props.signup(formProps, ()=> {
 
     this.props.history.push('/blog');
@@ -83,7 +86,7 @@ onSubmit = formProps => {
 
             <div>{this.props.errorMessage}</div>
 
-            <button>Sign Up</button>
+            <button class="button">Sign Up</button>
 
             </form>
 

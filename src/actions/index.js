@@ -83,7 +83,7 @@ export const signin = (formProps, callback) => async dispatch => {
 
 export const signout = () => {
 
-  localStorage.removeitem('token');
+  localStorage.removeItem('token');
 
   return {
     type: AUTH_USER,

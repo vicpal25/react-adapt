@@ -6,6 +6,8 @@ import {compose} from 'redux';
 import * as actions from '../actions';
 import { Link } from 'react-router-dom';
 
+import 'components/styles/SignIn.css';
+
 
 class SignIn extends Component {
 
@@ -65,7 +67,13 @@ onSubmit = formProps => {
 
     return (
 
-            <form onSubmit={handleSubmit(this.onSubmit)}>
+            <form class="signinform" onSubmit={handleSubmit(this.onSubmit)}>
+
+            <header class="login-header">
+            <h1 class="login-logo">U'I Login</h1>
+            <h2 class="little-big-header">Log in!</h2>
+            </header>
+
 
             <label htmlFor="email">EMAIL</label>
             <Field name="email" type="text" component="input" autoComplete="none" />
@@ -74,9 +82,12 @@ onSubmit = formProps => {
 
             <div>{this.props.errorMessage}</div>
 
-            <button>Sign In</button>
+            <button class="button signin-button">Sign In</button>
 
-            <p>Dont have an account?<Link to="/signup">Create Account</Link></p>
+            <div class="signup-callout">
+                <p>Dont have an account?<Link to="/signup">Sign up now!</Link></p>        
+            </div>
+
 
             </form>
 
