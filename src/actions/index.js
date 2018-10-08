@@ -4,7 +4,9 @@ import {
   FETCH_COMMENTS,
   CHANGE_AUTH,
   AUTH_USER,
-  AUTH_ERROR
+  AUTH_ERROR,
+  FETCH_ATHLETE,
+  FETCH_ACTIVITIES
 } from 'actions/types';
 
 export function saveComment(comment) {
@@ -21,6 +23,26 @@ export function fetchComments() {
     type: FETCH_COMMENTS,
     payload: response
   };
+}
+
+export function fetchAthlete() {
+  const response = axios.get('http://localhost:3090/getAthlete/11389513');
+
+  return {
+    type: FETCH_ATHLETE,
+    payload: response
+  };
+
+}
+
+export function fetchActivities() {
+  const response = axios.get('http://localhost:3090/getActivities/11389513');
+
+  return {
+    type: FETCH_ACTIVITIES,
+    payload: response
+  }
+
 }
 
 export function changeAuth(isLoggedIn) {

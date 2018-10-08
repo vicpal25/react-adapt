@@ -2,14 +2,6 @@ const BlogEntries = require('../model/blogentries');
 
 exports.index = function(req, res, next){
 
-    // req.checkBody('email', 'A email is needed.').notEmpty();
-    // req.checkBody('password', 'A valid password is needed.').notEmpty();
- 
-    // let errors = req.validationErrors();
-    // if (errors) {
-    //     return res.status(500).send(errors);
-    // }
- 
     const email = req.body.email;
     const password = req.body.password;
 
