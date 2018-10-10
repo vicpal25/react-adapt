@@ -1,11 +1,35 @@
 .athlete {
-    background-color: #fff;
-    padding: 30px 20px;
-    border-radius: 3px;
+
+    .chart-column {
+        background-color: #001019;
+    }
+
+    table {
+
+        thead {
+            background-color: #011a27 !important;
+            border: 1px solid #2e2d2d;
+            color:#fff;
+
+        }
+
+        tbody{
+            background-color: #001019 !important;
+            border: 1px solid #2e2d2d;
+
+            &:hover {
+                background-color: #052538 !important;
+            }
+
+            a {
+                font-weight: bold;
+            }
+        }
+    }
 
     h3{
 
-        color:#dbd3f3;
+        color:#fff;
     }
 
     .row {
@@ -14,15 +38,15 @@
 
 
         .columns:nth-child(1) {
-            width:20%;
+            width:14%;
         }
 
         .columns:nth-child(2) {
             width:80%;
             padding-top:80px;
-            color:#17141f;
+            color:#fff;
             span {
-                color: #888;
+                color: #fff;
             }
             p {
                 line-height: 0.5;

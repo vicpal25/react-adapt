@@ -6,8 +6,9 @@ import CommentList from 'components/CommentList';
 import SignUp from 'components/SignUp';
 import SignIn from 'components/SignIn';
 import SignOut from 'components/SignOut';
-import SideNav from 'components/SideNav';
 import BlogEntry from 'components/BlogEntry';
+import Activity from 'components/Activity';
+import Athlete from 'components/Athlete';
 import * as actions from 'actions';
 import 'components/App.css';
 
@@ -25,7 +26,7 @@ class App extends Component {
         <ul className="menu">
           <li><Link to="/signout">Sign Out</Link></li>
           <li><Link to="/post">Post A Comment</Link></li>
-          <li><Link to="/blog">Blog</Link></li>
+          <li><Link to="/athlete">My Stats</Link></li>
           </ul>
         );
     }
@@ -54,17 +55,14 @@ class App extends Component {
         {this.renderHeader()}
 
         <article className="grid-container">
-          <div className="grid-x grid-margin-x" id="content">
-            <div className="medium-9 cell">
+            <Route path="/athlete" component={Athlete} />
               <Route path="/post" component={CommentBox} />
               <Route path="/" exact component={SignIn} />
               <Route path="/blog" component={BlogEntry} />
               <Route path="/signup" component={SignUp} />
               <Route path="/signout" component={SignOut} />
               <Route path="/signin" component={SignIn} />
-            </div>
-            <CommentList/>
-            </div>
+              <Route path="/activities/:id" component={Activity} />
         </article>
 
       </span>

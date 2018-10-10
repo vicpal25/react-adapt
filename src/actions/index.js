@@ -6,7 +6,8 @@ import {
   AUTH_USER,
   AUTH_ERROR,
   FETCH_ATHLETE,
-  FETCH_ACTIVITIES
+  FETCH_ACTIVITIES,
+  FILTERED_ACTIVITIES
 } from 'actions/types';
 
 export function saveComment(comment) {
@@ -44,6 +45,16 @@ export function fetchActivities() {
   }
 
 }
+
+export function fetchActivitiesFiltered(max) {
+  const response = axios.get('http://localhost:3090/getActivities/11389513');
+
+  return {
+    type: FILTERED_ACTIVITIES,
+    payload: response
+  }
+
+} 
 
 export function changeAuth(isLoggedIn) {
   return {

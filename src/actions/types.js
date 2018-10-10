@@ -5,3 +5,5 @@ export const AUTH_USER = 'auth_user';
 export const AUTH_ERROR = 'auth_error';
 export const FETCH_ATHLETE = 'fetch_athlete';
 export const FETCH_ACTIVITIES = 'fetch_activities';
+export const FILTERED_ACTIVITIES = 'filtered_activities';
+export const WEEKLY_PROGRESS = 'weekly_progress';

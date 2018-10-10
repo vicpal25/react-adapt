@@ -1,9 +1,22 @@
 .signinform {
 
+    padding-left: 45px;
+    padding-right: 45px;
+    border: 1px solid #63738a;
+    border-radius: 4px;
+    background-image: url('https://watch.spectrum.net/6979d976ba0b3fdbf8c68f7bd0b9a820.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: #002133;
+    padding-bottom:20px;
+    padding-top:40px;
+    margin-top:50px;
+
+    .little-big-header {
+        font-weight: 500;
+    }
 
     .signup-callout {
-
-        background-color: #126195;
         padding:10px 10px;
         color:#fff;
 

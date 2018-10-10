@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom';
 
 import 'components/styles/SignIn.css';
 
-
 class SignIn extends Component {
 
 constructor() {
@@ -27,7 +26,7 @@ constructor() {
 }
 
 onPasswordChange(e) {
-    // console.log(e);
+    
 }
 
 handleEmailChange = (evt) => {
@@ -56,7 +55,7 @@ validate(email, password) {
 onSubmit = formProps => {
   this.props.signin(formProps, ()=> {
 
-    this.props.history.push('/blog');
+    this.props.history.push('/athlete');
 
   });
 };
@@ -67,13 +66,15 @@ onSubmit = formProps => {
 
     return (
 
-            <form class="signinform" onSubmit={handleSubmit(this.onSubmit)}>
+      <div className="grid-x grid-margin-x" id="content">
 
-            <header class="login-header">
-            <h1 class="login-logo">U'I Login</h1>
-            <h2 class="little-big-header">Log in!</h2>
+            <div className="medium-4 cell">
+
+            <form className="signinform" onSubmit={handleSubmit(this.onSubmit)}>
+
+            <header className="login-header">
+            <h5 className="little-big-header">Sign In to Get Started</h5>
             </header>
-
 
             <label htmlFor="email">EMAIL</label>
             <Field name="email" type="text" component="input" autoComplete="none" />
@@ -82,15 +83,19 @@ onSubmit = formProps => {
 
             <div>{this.props.errorMessage}</div>
 
-            <button class="button signin-button">Sign In</button>
+            <button className="button signin-button expanded">Sign In</button>
 
-            <div class="signup-callout">
+            <div className="signup-callout">
                 <p>Dont have an account?<Link to="/signup">Sign up now!</Link></p>        
             </div>
 
-
             </form>
 
+            </div>
+
+            <div className="medium-8 cell">
+            </div>
+    </div>            
 
     )
   }

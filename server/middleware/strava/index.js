@@ -1,6 +1,7 @@
 const request = require('request');
 const strava = require('strava-v3');
 const Athlete = require('../../model/athlete');
+const Preferences = require('./preferences');
 
 module.exports = {
   version: '1.0',
@@ -55,8 +56,10 @@ module.exports = {
   getAthlete: function (id) {
 
     return new Promise((resolve, reject) => {
-      
-      Athlete.findOne({ 'strava_id': id }, function (err, athlete) {
+
+      Athlete.findOne({
+        'strava_id': id
+      }, function (err, athlete) {
 
         if (!athlete) {
           reject('No athlete found based on given id');
@@ -70,28 +73,31 @@ module.exports = {
 
 
   },
-  getActivities: function(id) {
+  getAthletePreferences: function (id) {
+    return Preferences.Get(id);
+  },
+  UpdateAthletePreferences: function (preferences, id) {
+    return Preferences.Update(preferences, id);
+  },
+  getActivities: function (id) {
 
     return new Promise((resolve, reject) => {
-      
+
       strava.athlete.listActivities({
         'access_token': '37339e182ee178884b7353d74b7fd8802e64d898'
       }, function (err, payload, limits) {
 
-  
-        if(err) {
+
+        if (err) {
           reject(err);
         }
 
         resolve(payload);
-  
+
       });
-  
+
 
     });
-
-
-
 
   }
 }

@@ -62,11 +62,9 @@ signUp(evt) {
 
 onSubmit = formProps => {
 
-  console.log(formProps);
-
   this.props.signup(formProps, ()=> {
 
-    this.props.history.push('/blog');
+    this.props.history.push('/athlete');
 
   });
 };

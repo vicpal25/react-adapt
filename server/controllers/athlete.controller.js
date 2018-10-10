@@ -28,3 +28,32 @@ exports.getActivities = function(req, res, next) {
 
 
 }
+
+exports.getPreferences = function(req, res) {
+
+    const strava_id = req.params.id;
+
+    stravaMiddleware.getAthletePreferences(strava_id)
+        .then(function (preferences) {
+            res.status(200).send(preferences);
+        })
+        .catch(function (err) {
+            res.status(500).json(err);
+        });
+
+}
+
+
+exports.updatePreferences = function(req, res) {
+
+    const strava_id = req.params.id;
+
+    stravaMiddleware.UpdateAthletePreferences(req.body, strava_id)
+        .then(function (preferences) {
+            res.status(200).send(preferences);
+        })
+        .catch(function (err) {
+            res.status(500).json(err);
+        });
+
+}

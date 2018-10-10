@@ -28,8 +28,9 @@ module.exports = function(app) {
         res.status(200).send('ok');
     })
 
-
     app.get('/getAthlete/:id', AthleteController.index);
     app.get('/getActivities/:id', AthleteController.getActivities);
+    app.get('/getAthletePreferences/:id',  AthleteController.getPreferences);
+    app.put('/getAthletePreferences/:id', AthleteController.updatePreferences);
 
 }

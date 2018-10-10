@@ -35,15 +35,17 @@ export class Athlete extends Component {
         const filtered = _.pick(this.props.athlete, ["city", "email", "firstname", "follower_count", "friend_count", "profile_pic", "strava_id", "state", "username"])
         const athlete = Object.entries(filtered).map(([key, value]) => ({key,value}));
 
+        const data = [{ x: 1, y: 3 }, { x: 3, y: 4 }]
+
         return (<div className="row clearfix">
                 <div className="columns large-6 float-left">
                     <h1>{ this.getcolumn('firstname', athlete) }</h1>
                     <img key={ this.getcolumn('profile_pic', athlete) } src={ this.getcolumn('profile_pic', athlete)  } alt="" className="img-responsive" />
                 </div>
                 <div className="columns large-6 float-left">
-                    <h5>Bio:</h5>
-                    <p>{ this.getcolumn('city', athlete) }, { this.getcolumn('state', athlete) } </p>
-                    <p>FOLLWERS <span>{ this.getcolumn('follower_count', athlete) }</span> | FRIENDS  <span>{ this.getcolumn('friend_count', athlete) }</span> </p>
+                    { this.getcolumn('city', athlete) }, { this.getcolumn('state', athlete) } <br/>
+                    FOLLWERS <span>{ this.getcolumn('follower_count', athlete) }</span> | FRIENDS  <span>{ this.getcolumn('friend_count', athlete) }</span> 
+
                 </div>
             </div>
                         
