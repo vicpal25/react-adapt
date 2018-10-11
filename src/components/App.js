@@ -9,6 +9,7 @@ import SignOut from 'components/SignOut';
 import BlogEntry from 'components/BlogEntry';
 import Activity from 'components/Activity';
 import Athlete from 'components/Athlete';
+import Preferences from 'components/admin/Preferences';
 import * as actions from 'actions';
 import 'components/App.css';
 
@@ -27,6 +28,7 @@ class App extends Component {
           <li><Link to="/signout">Sign Out</Link></li>
           <li><Link to="/post">Post A Comment</Link></li>
           <li><Link to="/athlete">My Stats</Link></li>
+          <li><Link to="/preferences">Preferences</Link></li>
           </ul>
         );
     }
@@ -63,6 +65,7 @@ class App extends Component {
               <Route path="/signout" component={SignOut} />
               <Route path="/signin" component={SignIn} />
               <Route path="/activities/:id" component={Activity} />
+              <Route path="/preferences" component={Preferences} />
         </article>
 
       </span>

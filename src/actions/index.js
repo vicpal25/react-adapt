@@ -56,6 +56,18 @@ export function fetchActivitiesFiltered(max) {
 
 } 
 
+export function featchAthletePreferences() {
+  
+  const response = axios.get('http://localhost:3090/getAthletePreferences/11389513');
+
+  return {
+    type: FILTERED_ACTIVITIES,
+    payload: response
+  }
+
+} 
+
+
 export function changeAuth(isLoggedIn) {
   return {
     type: CHANGE_AUTH,
