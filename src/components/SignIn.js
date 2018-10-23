@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import {compose} from 'redux';
 import * as actions from '../actions';
 import { Link } from 'react-router-dom';
+import { StravaConnect } from '../components/StravaConnect';
 
 import 'components/styles/SignIn.css';
 
@@ -70,6 +71,9 @@ onSubmit = formProps => {
 
             <div className="medium-4 cell">
 
+            HI
+           <StravaConnect/>
+            
             <form className="signinform" onSubmit={handleSubmit(this.onSubmit)}>
 
             <header className="login-header">

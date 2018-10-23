@@ -1,22 +1,18 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom';
 
 export class WeeklyProgress extends Component {
-  static propTypes = {
-    prop: PropTypes
-  }
 
   render() {
     return (
 
-        <div class="card">
-        <div class="card-divider">
+        <div className="card">
+        <div className="card-divider">
             Weekly Progress 
-
-            <i class="step fi-widget size-16 right">&nbsp;Configure</i>
+            <i className="step fi-widget size-16 right"><Link to="/preferences">&nbsp;Configure</Link></i>
         </div>
-        <div class="card-section">
+        <div className="card-section">
 
 
         </div>

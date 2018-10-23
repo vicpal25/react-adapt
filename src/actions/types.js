@@ -7,3 +7,5 @@ export const FETCH_ATHLETE = 'fetch_athlete';
 export const FETCH_ACTIVITIES = 'fetch_activities';
 export const FILTERED_ACTIVITIES = 'filtered_activities';
 export const WEEKLY_PROGRESS = 'weekly_progress';
+export const PREFERENCES = 'preferences';
+export const FETCH_ACTIVITY = 'fetch_activity';

@@ -2,7 +2,20 @@
     padding: 30px 20px;
     border-radius: 3px;
 
+    .details {
 
+        table {
+            td, th {
+                text-align: center;
+            }
+        }
+
+        .column-2 {
+
+            padding-top:72px;
+        }
+
+    }
 
 
 }

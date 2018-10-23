@@ -84,7 +84,7 @@ onSubmit = formProps => {
 
             <div>{this.props.errorMessage}</div>
 
-            <button class="button">Sign Up</button>
+            <button className="button">Sign Up</button>
 
             </form>
 

@@ -4,9 +4,6 @@ import stateSchema from './stateSchema';
 export default ({ dispatch, getState}) => next => action => {
 
     next(action);
-
-   console.log(tv4.validate(getState(), stateSchema));
-
     // tv4.validate(getState(), stateSchema);
 
 

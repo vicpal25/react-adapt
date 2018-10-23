@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import _ from 'lodash';
 
 import { WeeklyProgress } from './WeeklyProgress';
-
+// import Loadable from 'react-loadable';
 import { connect } from 'react-redux'
 import * as actions from 'actions';
 import requireAuth from 'components/requireAuth';
@@ -16,12 +16,19 @@ const initialState = {
     filteredItems: [ ]
 };
 
+// const LoadableBlogPostsList = Loadable({
+//     loader: () => renderActivites(),
+//     loading() {
+//        return <div>Loading...</div>
+//     }
+//   });
+
 export class Activities extends Component {
 
   constructor(props) {
     super(props);
-    this.props.fetchActivitiesFiltered(3);
-    this.props.fetchActivities();
+    this.props.fetchActivities(11389513);
+    this.props.fetchActivitiesFiltered(3, 11389513);
   }
 
   mscTomph(msc) {
@@ -92,19 +99,19 @@ export class Activities extends Component {
                     <th>Workout Type</th>
                 </tr>
             </thead>
-                    {this.renderActivites()} 
+                  {this.renderActivites()}
             </table>       
             </div>
         </div>
         <div className="medium-4 cell chart-column">
 
-            <div class="card">
-                <div class="card-divider">
+            <div className="card">
+                <div className="card-divider">
                     Recent Avg. speed analysis
                 </div>
-                <div class="card-section">
+                <div className="card-section">
                 {this.renderChart()}
-                </div>
+                </div>  
             </div>
 
             <WeeklyProgress/>

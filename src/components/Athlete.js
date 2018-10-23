@@ -12,7 +12,7 @@ export class Athlete extends Component {
 //  athlete;
   constructor(props) {
     super(props);
-    this.props.fetchAthlete();
+    this.props.fetchAthlete(11389513);
   }
 
 

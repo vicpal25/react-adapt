@@ -7,8 +7,15 @@ import {
   AUTH_ERROR,
   FETCH_ATHLETE,
   FETCH_ACTIVITIES,
-  FILTERED_ACTIVITIES
+  FILTERED_ACTIVITIES,
+  FETCH_ACTIVITY,
+  PREFERENCES
 } from 'actions/types';
+
+// const DEV_API = 'https://n8itikas80.execute-api.us-east-2.amazonaws.com/dev/';
+
+const DEV_API = 'http://localhost:3090';
+
 
 export function saveComment(comment) {
   return {
@@ -26,8 +33,9 @@ export function fetchComments() {
   };
 }
 
-export function fetchAthlete() {
-  const response = axios.get('http://localhost:3090/getAthlete/11389513');
+export function fetchAthlete(athlete_id) {
+
+  const response = axios.get(DEV_API + '/athlete/' + athlete_id);
 
   return {
     type: FETCH_ATHLETE,
@@ -35,9 +43,8 @@ export function fetchAthlete() {
   };
 
 }
-
-export function fetchActivities() {
-  const response = axios.get('http://localhost:3090/getActivities/11389513');
+export function fetchActivities(strava_id) {
+  const response = axios.get(DEV_API + '/activities/' + strava_id);
 
   return {
     type: FETCH_ACTIVITIES,
@@ -46,8 +53,22 @@ export function fetchActivities() {
 
 }
 
-export function fetchActivitiesFiltered(max) {
-  const response = axios.get('http://localhost:3090/getActivities/11389513');
+export function fetchActivity(activity_id) {
+
+  let response = axios.get(DEV_API + '/activity/' + activity_id);
+
+  console.log('responsa');
+  console.log(response.data);
+
+  return {
+    type: FETCH_ACTIVITY,
+    payload: response
+  }
+
+}
+
+export function fetchActivitiesFiltered(max, strava_id) {
+  const response = axios.get(DEV_API + '/activities/' + strava_id);
 
   return {
     type: FILTERED_ACTIVITIES,
@@ -56,16 +77,41 @@ export function fetchActivitiesFiltered(max) {
 
 } 
 
-export function featchAthletePreferences() {
+export function fetchPreferences(strava_id) {
   
-  const response = axios.get('http://localhost:3090/getAthletePreferences/11389513');
+  const response = axios.get(DEV_API + '/preferences/' + strava_id);
 
   return {
-    type: FILTERED_ACTIVITIES,
+    type: PREFERENCES,
     payload: response
   }
 
 } 
+
+export function updatePreferences  (strava_id, payload)  {
+
+  try {
+
+    const response = axios.put(DEV_API + '/preferences/' + strava_id, payload);
+
+    return {
+      type: PREFERENCES,
+      payload: response
+    }
+
+    
+  }
+    catch(ex) {
+
+    return{
+      type: AUTH_ERROR,
+      payload: 'UPDATE_ERROR'
+    }
+
+  }
+
+
+}
 
 
 export function changeAuth(isLoggedIn) {
@@ -79,7 +125,7 @@ export const signup = (formProps, callback) => async dispatch => {
 
   try {
 
-    const response = await axios.post('http://localhost:3090/signup', formProps);
+    const response = await axios.post(DEV_API + '/signup', formProps);
 
     dispatch({
       type: AUTH_USER,
