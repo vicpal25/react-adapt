@@ -71,7 +71,6 @@ onSubmit = formProps => {
 
             <div className="medium-4 cell">
 
-            HI
            <StravaConnect/>
             
             <form className="signinform" onSubmit={handleSubmit(this.onSubmit)}>
