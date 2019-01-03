@@ -9,56 +9,66 @@ import requireAuth from 'components/requireAuth';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { LineChart, Line, CartesianGrid, Tooltip, YAxis, XAxis} from 'recharts';
 
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+
+import {metersToMiles, secondsToHours, mscTomph, converDate } from '../components/shared/methods';
+
+import 'components/styles/Activities.css';
+
 let chartData = [];
 
 const initialState = {
     searchText: '',
-    filteredItems: [ ]
+    filteredItems: [],
+    bothOn: false
 };
 
-// const LoadableBlogPostsList = Loadable({
-//     loader: () => renderActivites(),
-//     loading() {
-//        return <div>Loading...</div>
-//     }
-//   });
+const CustomTableCell = withStyles(theme => ({
+    head: {
+        backgroundColor: theme.palette.common.black,
+        color: theme.palette.common.white,
+    },
+    body: {
+        fontSize: 14,
+    },
+    }))(TableCell);
 
 export class Activities extends Component {
+
+
 
   constructor(props) {
     super(props);
     this.props.fetchActivities(11389513);
     this.props.fetchActivitiesFiltered(3, 11389513);
-  }
 
-  mscTomph(msc) {
-    return Math.round(msc * 3600 / 1610.3*1000)/1000;
-  }
-
-  metersToMiles(meters) {
-    return Math.round(meters*0.000621371192);
-  }
-
-  secondsToHours(seconds) {
-    return  Math.floor(seconds / 60);
-  }
-
-  converDate(date) {
-    var timestamp = new Date(date);
-    return timestamp.toLocaleDateString();
+    this.state = {
+        bothOn: false
+      }
   }
 
   renderChart() {
 
     return (
         <LineChart width={350} height={180} data={this.props.chart} margin={{ top: 20, right: 20, bottom: 5, left: 0 }}>
-        <Line name="Avg. Speed" type="monotone" dataKey="average_speed" stroke="#ffac08" />
-        <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-        <XAxis dataKey="start_date_local" />
-        <YAxis />
-        <Tooltip />
-    </LineChart>)
+            <Line name="Avg. Speed" type="monotone" dataKey="average_speed" stroke="#ffac08" />
+            <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+                <XAxis dataKey="start_date_local" />
+            <YAxis />
+            <Tooltip />
+        </LineChart>)
   
+  }
+
+  handleToggle = on => {
+    this.setState({bothOn: (on) ? true : false})
   }
 
   renderActivites() {
@@ -66,17 +76,16 @@ export class Activities extends Component {
     if(this.props.activities && Object.values(this.props.activities)) {
 
         return this.props.activities.map(activity => {
-            return  <tbody key={activity.upload_id}>
-                <tr>
-                    <td> <Link to={`/activities/${activity.id}`}>{activity.name}</Link></td>
-                    <td className="text-center">{this.metersToMiles(activity.distance)}</td>
-                    <td className="text-center">{this.secondsToHours(activity.moving_time)}</td>
-                    <td className="text-center">{this.mscTomph(activity.average_speed)}</td>
-                    <td className="text-center">{this.converDate(activity.start_date_local)}</td>
-                    <td className="text-center">{activity.type}</td>
-                </tr>
-            </tbody>
-       
+            return  <TableBody key={activity.upload_id}>
+                <TableRow>
+                    <CustomTableCell> <Link to={`/activities/${activity.id}`}>{activity.name}</Link></CustomTableCell>
+                    <CustomTableCell className="text-center">{ metersToMiles(activity.distance)}</CustomTableCell>
+                    <CustomTableCell className="text-center">{ secondsToHours(activity.moving_time)}</CustomTableCell>
+                    <CustomTableCell className="text-center">{ mscTomph(activity.average_speed)}</CustomTableCell>
+                    <CustomTableCell className="text-center">{ converDate(activity.start_date_local)}</CustomTableCell>
+                    <CustomTableCell className="text-center">{activity.type}</CustomTableCell>
+                </TableRow>
+            </TableBody>       
         })  
 
     }
@@ -88,19 +97,19 @@ export class Activities extends Component {
 
             <div className="medium-8 cell">
             <div className="athlete-list row">
-            <table>
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Distance  <small>(In Miles)</small></th>
-                    <th>Moving Time  <small>(In minutes)</small></th>
-                    <th>Average Speed  <small>(MPH)</small></th>
-                    <th>Start Time/Date</th>
-                    <th>Workout Type</th>
-                </tr>
-            </thead>
+            <Table className="activities">
+            <TableHead>
+                <TableRow>
+                    <CustomTableCell>Name</CustomTableCell>
+                    <CustomTableCell>Distance  <small>(In Miles)</small></CustomTableCell>
+                    <CustomTableCell>Moving Time  <small>(In minutes)</small></CustomTableCell>
+                    <CustomTableCell>Average Speed  <small>(MPH)</small></CustomTableCell>
+                    <CustomTableCell>Start Time/Date</CustomTableCell>
+                    <CustomTableCell>Workout Type</CustomTableCell>
+                </TableRow>
+            </TableHead>
                   {this.renderActivites()}
-            </table>       
+            </Table>       
             </div>
         </div>
         <div className="medium-4 cell chart-column">
@@ -115,8 +124,6 @@ export class Activities extends Component {
             </div>
 
             <WeeklyProgress/>
-
-
 
         </div>
     </div>

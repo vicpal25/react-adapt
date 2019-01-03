@@ -4,29 +4,6 @@
         background-color: #001019;
     }
 
-    table {
-
-        thead {
-            background-color: #011a27 !important;
-            border: 1px solid #2e2d2d;
-            color:#fff;
-
-        }
-
-        tbody{
-            background-color: #001019 !important;
-            border: 1px solid #2e2d2d;
-
-            &:hover {
-                background-color: #052538 !important;
-            }
-
-            a {
-                font-weight: bold;
-            }
-        }
-    }
-
     h3{
 
         color:#fff;

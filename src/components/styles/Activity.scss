@@ -1,8 +1,12 @@
 .activity {
     padding: 30px 20px;
     border-radius: 3px;
+    background-color: #fff;
+
+    font-family: Roboto;
 
     .details {
+
 
         table {
             td, th {
@@ -11,11 +15,50 @@
         }
 
         .column-2 {
-
             padding-top:72px;
         }
 
     }
+
+    .segments {
+        p {
+            margin-bottom:0;
+        }
+    }
+
+    .comments {
+        background-color: #fff;
+         padding:20px 0 ;
+
+        fieldset  {
+            border: none;
+        }
+    }
+
+    .gold {
+        color:gold ;
+    }
+
+    .silver {
+        color:silver;
+    }
+
+    .bronze {
+        color:burlywood;
+    }
+
+
+}
+
+.detailsgraph {
+    border:1px solid #e22;
+
+
+
+
+
+
+
 
 
 }
