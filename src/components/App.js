@@ -13,6 +13,7 @@ import Athlete from 'components/Athlete';
 import Preferences from 'components/admin/Preferences';
 import * as actions from 'actions';
 import 'components/App.css';
+import MiniDrawer from '../components/shared/nav/Drawer'
 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -22,18 +23,71 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 
 
-const styles = {
+const drawerWidth = 240;
+
+
+const styles = theme => ({
   root: {
-    flexGrow: 1,
+    display: 'flex',
   },
-  grow: {
-    flexGrow: 1,
+  appBar: {
+    zIndex: theme.zIndex.drawer + 1,
+    transition: theme.transitions.create(['width', 'margin'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+  },
+  appBarShift: {
+    marginLeft: drawerWidth,
+    width: `calc(100% - ${drawerWidth}px)`,
+    transition: theme.transitions.create(['width', 'margin'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
   },
   menuButton: {
-    marginLeft: -12,
-    marginRight: 20,
+    marginLeft: 12,
+    marginRight: 36,
   },
-};
+  hide: {
+    display: 'none',
+  },
+  drawer: {
+    width: drawerWidth,
+    flexShrink: 0,
+    whiteSpace: 'nowrap',
+  },
+  drawerOpen: {
+    width: drawerWidth,
+    transition: theme.transitions.create('width', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  },
+  drawerClose: {
+    transition: theme.transitions.create('width', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    overflowX: 'hidden',
+    width: theme.spacing.unit * 7 + 1,
+    [theme.breakpoints.up('sm')]: {
+      width: theme.spacing.unit * 9 + 1,
+    },
+  },
+  toolbar: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    padding: '0 8px',
+    ...theme.mixins.toolbar,
+  },
+  content: {
+    flexGrow: 1,
+    padding: theme.spacing.unit * 3,
+  },
+});
+
 
 
 class App extends Component {
@@ -65,15 +119,10 @@ class App extends Component {
     return (
 
       <div className={this.state.classes.root}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton className={this.state.classes.menuButton} color="inherit" aria-label="Menu">
-            <MenuIcon />
-          </IconButton>
-            {this.renderButton()}
-          </Toolbar>
-      </AppBar>
-    </div>
+        <MiniDrawer>
+        {this.renderButton()}
+        </MiniDrawer>
+      </div>
 
     );
   }
@@ -83,18 +132,21 @@ class App extends Component {
       <span>
         {this.renderHeader()}
 
-        <article className="grid-container">
-            <Route path="/athlete" component={Athlete} />
-              <Route path="/post" component={CommentBox} />
-              <Route path="/order" component={Order} />
-              <Route path="/" exact component={SignIn} />
-              <Route path="/blog" component={BlogEntry} />
-              <Route path="/signup" component={SignUp} />
-              <Route path="/signout" component={SignOut} />
-              <Route path="/signin" component={SignIn} />
-              <Route path="/activities/:id" component={Activity} />
-              <Route path="/preferences" component={Preferences} />
-        </article>
+        <main className={this.state.classes.content}>
+        <div className={this.state.classes.toolbar}/>
+
+          <Route path="/athlete" component={Athlete} />
+          <Route path="/post" component={CommentBox} />
+          <Route path="/order" component={Order} />
+          <Route path="/" exact component={SignIn} />
+          <Route path="/blog" component={BlogEntry} />
+          <Route path="/signup" component={SignUp} />
+          <Route path="/signout" component={SignOut} />
+          <Route path="/signin" component={SignIn} />
+          <Route path="/activities/:id" component={Activity} />
+          <Route path="/preferences" component={Preferences} />
+
+        </main>
 
       </span>
 
