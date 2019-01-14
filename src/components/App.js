@@ -3,7 +3,6 @@ import { Route, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import CommentBox from 'components/CommentBox';
 import CommentList from 'components/CommentList';
-import Order from 'components/Order';
 import SignUp from 'components/SignUp';
 import SignIn from 'components/SignIn';
 import SignOut from 'components/SignOut';
@@ -86,7 +85,6 @@ class App extends Component {
         <article className="grid-container">
             <Route path="/athlete" component={Athlete} />
               <Route path="/post" component={CommentBox} />
-              <Route path="/order" component={Order} />
               <Route path="/" exact component={SignIn} />
               <Route path="/blog" component={BlogEntry} />
               <Route path="/signup" component={SignUp} />
